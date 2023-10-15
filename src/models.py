@@ -78,7 +78,7 @@ class Favorites(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
     planet_id = db.Column(db.Integer, db.ForeignKey('planets.id'))
     character_id = db.Column(db.Integer, db.ForeignKey('characters.id'))
-    fav_type = db.Column(db.Enum("character","planet"))
+    fav_type = db.Column(db.Enum("character","planet",name= "favorite_enum_type"))
 
     user = db.relationship("User", back_populates="favorites")
     planet = db.relationship("Planets")
