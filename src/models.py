@@ -18,6 +18,9 @@ class User(db.Model):
             "id": self.id,
             "email": self.email,
             "name": self.name,
+            "favorites": list (map(lambda item:item.serialize(),self.favorites))
+
+        
             # do not serialize the password, its a security breach
         }
     
@@ -83,3 +86,12 @@ class Favorites(db.Model):
     user = db.relationship("User", back_populates="favorites")
     planet = db.relationship("Planets")
     character = db.relationship("Characters")
+    def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "planet_id": self.planet_id,
+            "character_id": self.character_id,
+            "favorite_type": self.fav_type
+           
+        }
